@@ -117,7 +117,7 @@ def get_similarities(new_name, existing_names):
 
     for word in prohibited_words:
         if word.lower() in new_name.lower():
-            return f"Oops! The name you provided contains a restricted word.{word}"
+            return f"Oops! The name you provided contains a prohibited word.{word}"
 
 
     # Standardize new name and existing names using LLM
