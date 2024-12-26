@@ -123,7 +123,6 @@ def get_similarities(new_name, existing_names):
     # Standardize new name and existing names using LLM
     standardized_new_name = expand_company_name(new_name,abbreviations)
     standardized_existing_names = [expand_company_name(name,abbreviations) for name in existing_names]
-    # Embed standardized names
     all_names = standardized_existing_names + [standardized_new_name]
     embeddings = model.encode(all_names)
 

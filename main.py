@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+from networkx.generators.harary_graph import hkn_harary_graph
+
 import processing
 
 Data_Base_Names = {
@@ -39,8 +41,33 @@ Prohibited_Words = {
 df1 = pd.DataFrame(Data_Base_Names)
 df2 = pd.DataFrame(Prohibited_Words)
 
-# Streamlit application
-st.markdown("""<h1 style="text-align: center ;">NameSecure Pro</h1>""",unsafe_allow_html=True)
+st.markdown("""
+<h1 style="text-align: center;">NameSecure Pro</h1>
+<hr style="border: 1px solid #ccc;">
+""", unsafe_allow_html=True)
+col1, col2 = st.columns(2)
+with col1:
+    st.text("")
+    st.markdown("""
+        <h5 font-family: 'Noto Sans', sans-serif;">
+            An AI-driven search engine designed to help organizations validate, suggest and ensure the availability of company names.
+        </h5>
+        """, unsafe_allow_html=True)
+
+with col2:
+    st.image("logo.jpg",width=350)
+st.markdown("""
+<div style="text-align: justify;">
+This showcases the capabilities of solving real-world problems with AI for legacy systems. Through this use case, we demonstrate:
+<ul>
+    <li><strong>AI Integration:</strong> How artificial intelligence can automate and enhance processes, such as validation and conflict detection, in your legacy systems.</li>
+    <li><strong>Real-Time Insights:</strong> The ability to provide instant feedback and actionable suggestions based on data.</li>
+    <li><strong>Scalable Solutions:</strong> Developing tailored AI-driven tools like NameSecure Pro to address specific business needs.</li>
+</ul>
+</div>
+""", unsafe_allow_html=True)
+
+
 st.markdown("### Problem Statement:")
 st.markdown("""
 <p style="text-align: justify;">Organizations and businesses often struggle with validating and checking the availability of desired company names due to duplication, prohibited terms, or lack of contextually similar suggestions. This can lead to delays in registration, legal conflicts, and branding issues, especially when dealing with regulatory bodies.</p>
@@ -53,7 +80,7 @@ Additionally, the system provides alternative name suggestions, ensuring regulat
 """,unsafe_allow_html=True)
 
 st.markdown("## Try It:")
-# Bold label for the input field
+st.image("workflow.png")
 st.markdown("#### Enter Company Name:")
 st.markdown(""" <p style="text-align: justify;">Check if your desired company name is unique, free of conflicts, and compliant with regulations in just a few seconds.</p>""",unsafe_allow_html=True)
 st.write(""" <p style="text-align: justify;">Not sure where to start? Try these sample names: Four Seasons, Government of Technology, EcoWave Solutions.</p>""",unsafe_allow_html=True)
@@ -62,7 +89,7 @@ user_input = st.text_input(
     placeholder="Type the company name here",
     label_visibility="collapsed"
 )
-# Output field
+
 st.markdown("#### Result Section:")
 if user_input.strip():
     result = processing.get_similarities(user_input, df1['Names'].to_list())
@@ -96,12 +123,17 @@ with col1:
 with col2:
     st.markdown("###### Here’s a list of prohibited words.")
     st.dataframe(df2, height=300,width=300)
+
+st.subheader("What Can We Do for You?")
+st.markdown("""
+We specialize in leveraging AI to modernize and optimize legacy systems. If you have specific pain points or challenges in integrating AI into your systems, we’d be happy to explore:
+- How our expertise can help solve them.
+- How to adapt solutions like NameSecure Pro to meet your needs.
+""")
 st.text("")
 
-# Create five columns
 col1, col2, col3 = st.columns(3)
 
-# Add content to each column
 with col1:
     st.write("")
 
