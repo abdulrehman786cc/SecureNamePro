@@ -1,3 +1,5 @@
+import base64
+
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 import re
@@ -135,7 +137,7 @@ def get_similarities(new_name, existing_names):
     result = [(name, round(similarity,2)) for name, similarity in zip(existing_names, similarities)]
     result =  sorted(result, key=lambda x: x[1], reverse=True)[:2]
 
-    if float(result[0][1]) >= 0.7:
+    if float(result[0][1]) >= 0.5:
          return (f"We found a relevant name in our database: {result[0][0]}\nYour entered name is {round(float(result[0][1]*100),2)}% similar to the name above.\n"
                  f"\n"
                  f"Suggested Alternatives:\n"
@@ -147,6 +149,9 @@ def get_similarities(new_name, existing_names):
         return ("Good news! The name is unique and meets regulatory standards.")
 
 
-
+def encode_image_to_base64(image_path):
+    with open(image_path, "rb") as image_file:
+        encoded = base64.b64encode(image_file.read()).decode()
+    return encoded
 
 
